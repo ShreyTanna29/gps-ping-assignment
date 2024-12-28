@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/mongoDB/db.ts","./src/mongoDB/model.ts","./src/redis/redis.ts","./src/routes/admin-routes.ts","./src/routes/auth-routes.ts","./src/routes/ping-route.ts","./src/test/load-test.ts","./src/test/test-data.ts"],"version":"5.6.3"}
