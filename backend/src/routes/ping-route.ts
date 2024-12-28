@@ -16,25 +16,25 @@ router.post("/ping", async (req: Request, res: Response): Promise<any> => {
         .json({ message: "Request has missing parameters." });
     }
 
-    // const userExists = await prisma.user.findUnique({
-    //   where: { email },
-    // });
+    const userExists = await prisma.user.findUnique({
+      where: { email },
+    });
 
-    // if (!userExists) {
-    //   return res.status(401).json("Unauthorized.");
-    // }
+    if (!userExists) {
+      return res.status(401).json("Unauthorized.");
+    }
 
     // caching data to redis
     const timestamp = new Date().toISOString();
-    // const pingKey = `ping:${email}:${timestamp}`;
+    const pingKey = `ping:${email}:${timestamp}`;
 
-    // const pingData = {
-    //   latitude,
-    //   longitude,
-    //   timestamp,
-    // };
-    // await redisClient.set(pingKey, JSON.stringify(pingData));
-    // await redisClient.expire(pingKey, 24 * 60 * 60);
+    const pingData = {
+      latitude,
+      longitude,
+      timestamp,
+    };
+    await redisClient.set(pingKey, JSON.stringify(pingData));
+    await redisClient.expire(pingKey, 24 * 60 * 60);
 
     // Storing data in MongoDB
 
